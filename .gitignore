@@ -63,3 +63,7 @@ nunit-*.xml
 /.idea/.idea.MyMiniForge/.idea/misc.xml
 /MyMiniForge.sln.DotSettings.user
 /.idea/.idea.MyMiniForge/.idea/vcs.xml
+
+.vs/
+.idea/
+*.user
