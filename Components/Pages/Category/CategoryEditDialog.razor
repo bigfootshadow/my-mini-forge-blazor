@@ -1,0 +1,35 @@
+﻿@using MudBlazorWebApp1.Data
+@using MudBlazorWebApp1.Data.Models
+<MudDialog>
+    <DialogContent>
+        <MudTextField T="string" 
+                      @bind-Value="CategoryItem.Name"
+                      Label="Name"></MudTextField>
+        <MudTextField T="string"
+                      @bind-Value="CategoryItem.Description"
+                      Label="Description"
+                      Lines="5"></MudTextField>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="OnCancelClicked">Cancel</MudButton>
+        <MudButton Color="Color.Error" OnClick="OnSaveClicked">Save</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    private IMudDialogInstance? MudDialog { get; set; }
+
+    [Parameter] public CategoryModel? CategoryItem { get; set; }
+
+    private void OnCancelClicked()
+    {
+        MudDialog!.Cancel();
+    }
+
+    private void OnSaveClicked()
+    {
+        MudDialog!.Close(DialogResult.Ok(CategoryItem));
+    }
+
+}

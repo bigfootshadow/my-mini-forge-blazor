@@ -1,0 +1,115 @@
+﻿@page "/category"
+@using Microsoft.EntityFrameworkCore
+@using MudBlazorWebApp1.Components.Pages.Shared
+@using MudBlazorWebApp1.Data
+@using MudBlazorWebApp1.Data.Models
+
+@inject IDialogService DialogService
+
+@inject ApplicationDbContext DbContext
+
+<PageTitle>Categories</PageTitle>
+
+<MudText Typo="Typo.h3" GutterBottom="true">Categories</MudText>
+
+
+<MudGrid>
+    <MudItem xs="12">
+        <MudButton Variant="Variant.Outlined"
+        Color="Color.Primary"
+        OnClick="OnAddClickAsync">Add</MudButton>
+
+    </MudItem>
+
+    <MudItem xs="12">
+        <MudTable Items="@AllCategories" SelectedItem="SelectedCategory">
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Description</MudTh>
+                <MudTh>Actions</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Description">@context.Description</MudTd>
+                <MudTd DataLabel="Actions">
+                    <MudStack Row="true">
+                        <MudIconButton Icon="@Icons.Material.Outlined.Edit"
+                        Color="Color.Primary"
+                        @onclick="@(() => EditItem(context))"></MudIconButton>
+                        <MudIconButton Icon="@Icons.Material.Outlined.Delete"
+                        Color="Color.Error"
+                        @onclick="@(() => DeleteItem(context))"></MudIconButton>
+                    </MudStack>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+
+    </MudItem>
+</MudGrid>
+
+@code
+{
+    private List<CategoryModel> AllCategories { get; set; } = [];
+    public CategoryModel? SelectedCategory { get; set; }
+
+    protected override void OnInitialized()
+    {
+        AllCategories = DbContext.Categories.ToList();
+    }
+
+    private async Task OnAddClickAsync()
+    {
+        var item = new CategoryModel
+            {
+                Name = "New Category"
+            };
+
+        var parameters = new DialogParameters<CategoryEditDialog>
+        {
+            {x => x.CategoryItem, item}
+        };
+
+        var dialog = await DialogService.ShowAsync<CategoryEditDialog>("Add Category", parameters);
+        
+        var dialogResult = await dialog.Result;
+        if (dialogResult is { Canceled: false })
+        {
+            var addedItem = (CategoryModel?)dialogResult.Data ?? throw new InvalidOperationException();
+            var result = await DbContext.Categories.AddAsync(addedItem);
+            await DbContext.SaveChangesAsync();
+
+            AllCategories.Add(result.Entity);
+        }
+     }
+
+
+    private async Task EditItem(CategoryModel item)
+    {
+        var parameters = new DialogParameters<CategoryEditDialog>
+        {
+            {x => x.CategoryItem, item}
+        };
+
+        var dialog = await DialogService.ShowAsync<CategoryEditDialog>("Edit Category", parameters);
+        var result = await dialog.Result;
+        if (result is { Canceled: false })
+        {
+            var editedItem = (CategoryModel?)result.Data ?? throw new InvalidOperationException();
+            DbContext.Categories.Attach(editedItem);
+            DbContext.Entry(editedItem).State = EntityState.Modified;
+            await DbContext.SaveChangesAsync();
+        }
+    }
+
+    private async Task DeleteItem(CategoryModel item)
+    {
+        var confirm = await DialogService.ShowMessageBox("Delete?", "Do you want to delete category?", yesText: "Delete", cancelText: "Cancel");
+        if (confirm != null && confirm.Value)
+        {
+            DbContext.Categories.Attach(item);
+            DbContext.Categories.Remove(item);
+            await DbContext.SaveChangesAsync();
+            AllCategories.Remove(item);
+        }
+    }
+}
