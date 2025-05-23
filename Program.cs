@@ -2,11 +2,12 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
-using MudBlazorWebApp1.Components;
-using MudBlazorWebApp1.Components.Account;
-using MudBlazorWebApp1.Data;
+using MyMiniForge.Components;
+using MyMiniForge.Components.Account;
+using MyMiniForge.Data;
+using MyMiniForge.Data.Models;
 
-namespace MudBlazorWebApp1
+namespace MyMiniForge
 {
     public class Program
     {

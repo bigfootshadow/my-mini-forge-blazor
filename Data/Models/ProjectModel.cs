@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MudBlazorWebApp1.Data.Models;
+namespace MyMiniForge.Data.Models;
 
 public class ProjectModel
 {

@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
-using MudBlazorWebApp1.Components.Account.Pages;
-using MudBlazorWebApp1.Components.Account.Pages.Manage;
-using MudBlazorWebApp1.Data;
+using MyMiniForge.Components.Account.Pages;
+using MyMiniForge.Components.Account.Pages.Manage;
+using MyMiniForge.Data.Models;
 
 namespace Microsoft.AspNetCore.Routing
 {

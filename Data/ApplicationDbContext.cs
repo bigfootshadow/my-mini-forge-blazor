@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MudBlazorWebApp1.Data.Models;
+using MyMiniForge.Data.Models;
 
-namespace MudBlazorWebApp1.Data
+namespace MyMiniForge.Data
 {
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
     {

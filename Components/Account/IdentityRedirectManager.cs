@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components;
 
-namespace MudBlazorWebApp1.Components.Account
+namespace MyMiniForge.Components.Account
 {
     internal sealed class IdentityRedirectManager(NavigationManager navigationManager)
     {

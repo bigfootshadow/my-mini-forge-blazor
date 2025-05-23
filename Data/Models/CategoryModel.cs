@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MudBlazorWebApp1.Data.Models;
+namespace MyMiniForge.Data.Models;
 
 public class CategoryModel
 {

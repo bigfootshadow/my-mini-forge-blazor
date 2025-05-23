@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
-using MudBlazorWebApp1.Data;
+using MyMiniForge.Data.Models;
 
-namespace MudBlazorWebApp1.Components.Account
+namespace MyMiniForge.Components.Account
 {
     internal sealed class IdentityUserAccessor(UserManager<ApplicationUser> userManager, IdentityRedirectManager redirectManager)
     {

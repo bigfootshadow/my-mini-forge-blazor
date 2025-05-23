@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MudBlazorWebApp1.Data;
+using MyMiniForge.Data;
 
 #nullable disable
 
-namespace MudBlazorWebApp1.Migrations
+namespace MyMiniForge.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250522125751_initial")]

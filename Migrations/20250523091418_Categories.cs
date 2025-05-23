@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MudBlazorWebApp1.Migrations
+namespace MyMiniForge.Migrations
 {
     /// <inheritdoc />
     public partial class Categories : Migration
