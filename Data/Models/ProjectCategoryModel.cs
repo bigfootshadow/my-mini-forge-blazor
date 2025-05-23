@@ -1,9 +1,12 @@
-﻿using Microsoft.Build.Framework;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MyMiniForge.Data.Models;
 
 public class ProjectCategoryModel
 {
+    [Key]
+    public Guid Id { get; set; }
+    
     [Required]
     public Guid ProjectId { get; set; }
     [Required]
